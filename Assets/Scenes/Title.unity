@@ -181,10 +181,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Start!!
+  m_text: "\uAC00\uAC8C\uB85C \uCD9C\uADFC\uD558\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
+  m_sharedMaterial: {fileID: -3212619214422926720, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9285f1a3eb7cd64dba119838edd1998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phase: 0
 --- !u!4 &317409863
 Transform:
   m_ObjectHideFlags: 0
@@ -360,10 +361,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: "K-\uB9C8\uCE74\uB871 \uB9DB \uC880 \uBD10\uB77C!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
+  m_sharedMaterial: {fileID: -3212619214422926720, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
