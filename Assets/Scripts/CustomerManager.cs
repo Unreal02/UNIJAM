@@ -22,9 +22,13 @@ public class CustomerManager : MonoBehaviour
     #endregion
 
     private readonly int MAXTOPPING = 5;
-    public int[] Order { get; private set; }
+    public int[] correctOrder { get; private set; }
+    public int[] inputOrder { get; private set; }
 
-    private List<List<string>> Toppings { get; set; }
+    public string orderText;
+
+    private List<List<string>> toppings { get; set; }
+    private int[,] lookUpTable = new int[,] { { 0, 1, 0, 0, 1 }, { 0, 0, 0, 0, 0 } };
 
     private void Awake()
     {
@@ -41,41 +45,49 @@ public class CustomerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             GenerateOrder();
-            Debug.Log(string.Format("{0}, {1}, {2}, {3}, {4}", GetTopping(0, Order[0]), GetTopping(1, Order[1]), GetTopping(2, Order[2]), GetTopping(3, Order[3]), GetTopping(4, Order[4])));
+            Debug.Log(orderText);
+            Debug.Log(string.Format("{0}, {1}, {2}, {3}, {4}", GetTopping(correctOrder[0], 0), GetTopping(correctOrder[1], 1), GetTopping(correctOrder[2], 2), GetTopping(correctOrder[3], 3), GetTopping(correctOrder[4], 4)));
         }
     }
 
     private void Init()
     {
-        if (Order == null)
+        if (correctOrder == null)
         {
-            Order = new int[] { -1, -1, -1, -1, -1 };
+            correctOrder = new int[] { -1, -1, -1, -1, -1 };
         }
-
-        if (Toppings == null)
+        if (inputOrder == null)
         {
-            Toppings = new List<List<string>>();
-            string[] _topping = new string[] { "µ˛±‚", "√ ƒ›∏¥", "πŸ≥™≥™", "¿Œ¿˝πÃ", "ƒ´∂Û∏·" };
+            inputOrder = new int[] { -1, -1, -1, -1, -1 };
+        }
+        if (toppings == null)
+        {
+            toppings = new List<List<string>>();
+            string[] _topping = new string[] { "Îî∏Í∏∞", "Ï¥àÏΩúÎ¶ø", "Î∞îÎÇòÎÇò", "Ïù∏Ï†àÎØ∏", "Ïπ¥ÎùºÎ©ú" };
             AddToppings(0, _topping);
-            _topping = new string[] { "∫Ì∑Á∫£∏Æ", "µ≈¡ˆπŸ", "æ∆∏ÛµÂ", "≥Ï¬˜", "πŒ√ " };
+            _topping = new string[] { "Î∏îÎ£®Î≤†Î¶¨", "ÎèºÏßÄÎ∞î", "ÏïÑÎ™¨Îìú", "ÎÖπÏ∞®", "ÎØºÏ¥à" };
             AddToppings(1, _topping);
         }
     }
 
     private void AddToppings(int x, string[] value)
     {
-        Toppings.Add(new List<string>());
+        toppings.Add(new List<string>());
         for (int i = 0; i < MAXTOPPING; i++)
         {
-            Toppings[x].Add(value[i]);
+            toppings[x].Add(value[i]);
         }
     }
 
-    private string GetTopping(int x, int y)
+    public string GetTopping(int x, int y)
     {
-        if (y != -1)
+        if (x != -1)
         {
-            return Toppings[y][x];
+            if (x != -2)
+            {
+                return toppings[x][y];
+            }
+            else return "Empty";
         }
         else
         {
@@ -83,25 +95,98 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// deposits specified order into inputOrder array
+    /// deposits -2 if collision happens on the same index
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="value"></param>
+    public void InputOrder(int index, int value)
+    {
+        if (inputOrder[index] != -1 && inputOrder[index] != value)
+        {
+            inputOrder[index] = -2;
+        }
+        else
+        {
+            inputOrder[index] = value;
+        }
+    }
+
+    public void ResetInputOrder()
+    {
+        inputOrder = new int[] { -1, -1, -1, -1, -1 };
+    }
+
+    public bool CheckOrder()
+    {
+        return Enumerable.SequenceEqual(correctOrder, inputOrder);
+    }
+
     private void GenerateOrder()
     {
-        Order = new int[] { -1, -1, -1, -1, -1 };
+        correctOrder = new int[] { -1, -1, -1, -1, -1 };
         int toppingCount = Random.Range(1, MAXTOPPING);
-        List<int> Drawn = new List<int>();
+        List<int> drawn = new List<int>();
         for (int i = 0; i < toppingCount; i++)
         {
             int toppingIndex = Random.Range(0, MAXTOPPING);
-            if (Drawn.Contains(toppingIndex))
+            if (drawn.Contains(toppingIndex))
             {
                 i--;
             }
             else
             {
-                Drawn.Add(toppingIndex);
-                Order[toppingIndex] = Random.Range(0, Toppings.SelectMany(list => list).Distinct().Count() / MAXTOPPING);
+                drawn.Add(toppingIndex);
+                correctOrder[toppingIndex] = Random.Range(0, toppings.SelectMany(list => list).Distinct().Count() / MAXTOPPING);
             }
         }
-        Drawn.Clear();
+        drawn.Clear();
+        EditOrderText();
     }
 
+    private void EditOrderText()
+    {
+        orderText = new string("");
+        int lastIndex = -1;
+        for (int i = 0; i < MAXTOPPING; i++)
+        {
+            if (correctOrder[i] != -1)
+            {
+                lastIndex = i;
+            }
+        }
+        int idx = 0;
+        foreach (int item in correctOrder)
+        {
+            if (item != -1)
+            {
+                orderText += toppings[item][idx];
+                if (idx != lastIndex)
+                {
+                    if (lookUpTable[item, idx] == 1)
+                    {
+                        orderText += "Ïù¥Îûë ";
+                    }
+                    else
+                    {
+                        orderText += "Îûë ";
+                    }
+                }
+                else
+                {
+                    if (lookUpTable[item, idx] == 1)
+                    {
+                        orderText += "Ïù¥ ";
+                    }
+                    else
+                    {
+                        orderText += "Í∞Ä ";
+                    }
+                }
+            }
+            idx++;
+        }
+        orderText += "Îì§Ïñ¥Í∞Ñ ÎßàÏπ¥Î°± Ï£ºÏÑ∏Ïöî.";
+    }
 }
