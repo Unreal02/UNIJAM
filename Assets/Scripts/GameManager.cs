@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum Phase
+public enum Phase
 {
     Title,
     GetOrder,
@@ -14,8 +14,8 @@ enum Phase
 
 public class GameManager : MonoBehaviour
 {
-    private GameManager instance;
-    public GameManager Instance
+    static private GameManager instance;
+    static public GameManager Instance
     {
         get
         {
@@ -28,14 +28,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private Phase phase = Phase.Title;
+    public Phase phase = Phase.Title;
     private bool prepareSuccess = false;
     private bool assembleSuccess = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        if (GameManager.Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        if (GameManager.Instance)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -47,7 +54,7 @@ public class GameManager : MonoBehaviour
     public void GoToGetOrder()
     {
         SceneManager.LoadScene("GetOrderPhase");
-        phase = Phase.Prepare;
+        phase = Phase.GetOrder;
     }
 
     public void GoToPrepare()

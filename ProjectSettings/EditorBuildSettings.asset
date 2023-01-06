@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 033cbb0146f24fe41b06538fa4b7174e
+  - enabled: 1
+    path: Assets/Scenes/GetOrderPhase.unity
+    guid: a6bd868b9ad50044a92cbac28c144f24
+  - enabled: 1
+    path: Assets/Scenes/PreparePhase.unity
+    guid: df45cc81ebe428043a57f9eeaab085e9
+  - enabled: 1
+    path: Assets/Scenes/ToppingPhase.unity
+    guid: 5999501587419684280dd4b29edf67ff
+  - enabled: 1
+    path: Assets/Scenes/ResultPhase.unity
+    guid: a32b84ad2fbfe36409ddf1ca506dcef1
   m_configObjects: {}
