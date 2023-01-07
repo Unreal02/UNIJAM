@@ -20,6 +20,7 @@ public class GameStopwatch : MonoBehaviour
     }
 
     private GameManager gameManager;
+    private GameObject background;
     private GameObject sun;
     private GameObject moon;
 
@@ -36,8 +37,9 @@ public class GameStopwatch : MonoBehaviour
         }
 
         gameManager = GameManager.Instance;
-        sun = transform.GetChild(0).Find("Sun").gameObject;
-        moon = transform.GetChild(0).Find("Moon").gameObject;
+        background = transform.GetChild(0).gameObject;
+        sun = background.transform.Find("Sun").gameObject;
+        moon = background.transform.Find("Moon").gameObject;
     }
 
     // Update is called once per frame
@@ -48,5 +50,13 @@ public class GameStopwatch : MonoBehaviour
         moon.transform.localPosition = -sun.transform.localPosition;
         sun.GetComponent<Image>().fillAmount = sun.transform.localPosition.y / 100f + 0.5f;
         moon.GetComponent<Image>().fillAmount = moon.transform.localPosition.y / 100f + 0.5f;
+        Image image = background.GetComponent<Image>();
+
+        Debug.Log(sunAngle);
+        Color sky = new Color(0.54f, 0.72f, 1f);
+        Color dark = new Color(0.2f, 0.2f, 0.2f);
+        if (sunAngle < Mathf.PI - 0.75f) image.color = sky;
+        else if (sunAngle >= Mathf.PI - 0.75f && sunAngle <= Mathf.PI + 0.25f) image.color = Color.Lerp(sky, dark, sunAngle - Mathf.PI + 0.75f);
+        else image.color = dark;
     }
 }
