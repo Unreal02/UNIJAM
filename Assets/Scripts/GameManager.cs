@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameStopwatch.Elapsed.Seconds >= gameTimeLimit)
+        if (gameStopwatch.Elapsed.TotalSeconds >= gameTimeLimit)
         {
             gameStopwatch.Reset();
             GoToFinalResult();
@@ -117,14 +117,66 @@ public class GameManager : MonoBehaviour
 
     public void GoToResult()
     {
-        SceneManager.LoadScene("ResultPhase");
+        StartCoroutine("_GoToResult");
+    }
+
+    public IEnumerator _GoToResult()
+    {
+        // GetOrderPhase scene으로 이동
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync("GetOrderPhase");
+        while (!asyncLoadLevel.isDone)
+        {
+            yield return null;
+        }
         phase = Phase.Result;
 
+        // GetOrderPhaseUI 숨기기
+        GameObject getOrderPhaseUI = GameObject.Find("GetOrderPhaseUI");
+        getOrderPhaseUI.SetActive(false);
+
+        // ResultUI
+        GameObject resultUI = GameObject.Find("ResultPhaseUI");
         if (meringueSuccess && ovenSuccess && toppingSuccess)
         {
             // 성공
             score++;
+            UnityEngine.Debug.Log("success");
+            resultUI.transform.GetChild(0).gameObject.SetActive(true);
+            resultUI.transform.GetChild(1).gameObject.SetActive(false);
         }
+        else
+        {
+            // 실패
+            UnityEngine.Debug.Log("fail");
+            resultUI.transform.GetChild(1).gameObject.SetActive(true);
+            resultUI.transform.GetChild(0).gameObject.SetActive(false);
+            TMP_Text text = resultUI.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
+
+            if (!meringueSuccess)
+            {
+                text.text = "뭐야!\n꼬끄가 맛이\n이상하잖아요!";
+            }
+            else if (!ovenSuccess)
+            {
+                text.text = "뭐야!\n꼬끄가 제대로\n안 구워졌잖아요!";
+            }
+            else if (!toppingSuccess)
+            {
+                text.text = "뭐야!\n제가 원했던 토핑이\n아니잖아요!";
+            }
+            else
+            {
+                UnityEngine.Debug.LogError("result check logic error");
+            }
+        }
+
+        yield return new WaitForSeconds(4f);
+
+        // GetOrderPhase로 이동
+        getOrderPhaseUI.SetActive(true);
+        resultUI.transform.GetChild(0).gameObject.SetActive(false);
+        resultUI.transform.GetChild(1).gameObject.SetActive(false);
+        GoToGetOrder();
     }
 
     public void GoToFinalResult()
