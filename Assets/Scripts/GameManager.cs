@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public bool toppingSuccess;
     private int score = 0;
     public Stopwatch gameStopwatch;
-    public float gameTimeLimit = 100f;
+    public float gameTimeLimit = 180f;
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
         phase = Phase.Title;
+        score = 0;
     }
 
     public void GoToGetOrder()
@@ -97,7 +98,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         CustomerManager.Instance.GenerateOrder();
         gameStopwatch.Start();
-        score = 0;
     }
 
     public void GoToPrepare()
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
         GameObject uiObject = GameObject.Find("FinalResultUI");
         TMP_Text text = uiObject.transform.Find("Text").GetComponent<TMP_Text>();
         text.text = string.Format("100초 동안 {0}개의 마카롱을 만들었어요.\n", score);
-        if (score >= 6)
+        if (score >= 3)
         {
             text.text += "이 가게는 성공적이네요!";
         }

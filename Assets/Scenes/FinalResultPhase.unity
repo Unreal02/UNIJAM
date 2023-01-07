@@ -153,6 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase: 4
+  meringueSuccess: 0
+  ovenSuccess: 0
+  toppingSuccess: 0
   gameTimeLimit: 100
 --- !u!4 &335857566
 Transform:
@@ -331,8 +334,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "10\uCD08 \uD6C4\uC5D0 \uBA54\uC778 \uD654\uBA74\uC73C\uB85C \uB3CC\uC544\uAC11\uB2C8\uB2E4..."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
-  m_sharedMaterial: {fileID: -3212619214422926720, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 19129d610e59ec0419285686430bcc95, type: 2}
+  m_sharedMaterial: {fileID: -8056762477270989472, guid: 19129d610e59ec0419285686430bcc95, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -644,8 +647,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "(\uACB0\uACFC \uD14D\uC2A4\uD2B8)"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
-  m_sharedMaterial: {fileID: -3212619214422926720, guid: 9b95114cff5d5344b8b91a8f2424b8e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 19129d610e59ec0419285686430bcc95, type: 2}
+  m_sharedMaterial: {fileID: -8056762477270989472, guid: 19129d610e59ec0419285686430bcc95, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
