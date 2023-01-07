@@ -46,9 +46,16 @@ public class DragTest : MonoBehaviour
         {
             if (!collision.collider.gameObject.CompareTag("filling"))
             {
-                Debug.Log(collision.collider.gameObject);
+                //Debug.Log(collision.collider.gameObject);
+                if (this.gameObject.tag == "macaroon")
+                {
+                    int index = this.gameObject.transform.parent.GetSiblingIndex();
+                    CustomerManager.Instance.DeleteOrder(index % 5, index / 5);
+                    Debug.Log(CustomerManager.Instance.GetTopping(index / 5, index % 5) + " was deleted");
+                }
                 transform.position = initpos;
                 this.gameObject.tag = "filling";
+                
             }
         }
     }

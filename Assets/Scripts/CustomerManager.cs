@@ -114,6 +114,19 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
+    public void DeleteOrder(int index, int value)
+    {
+        if (inputOrder[index] == -2)
+        {
+            inputOrder[index] = value == 1 ?  0 : 1;
+        }
+        else
+        {
+            inputOrder[index] = -1;
+        }
+    }
+    
+
     public void ResetInputOrder()
     {
         inputOrder = new int[] { -1, -1, -1, -1, -1 };
