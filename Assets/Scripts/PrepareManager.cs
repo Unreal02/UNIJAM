@@ -68,6 +68,7 @@ public class PrepareManager : MonoBehaviour
     public void GoToOven()
     {
         phase = PreparePhase.Oven;
+        stick.OnGoToOven();
         Debug.Log(CheckShake());
     }
 

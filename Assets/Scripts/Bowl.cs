@@ -51,8 +51,8 @@ public class Bowl : MonoBehaviour
         {
             Debug.Log("asdf");
             PrepareManager.Instance.GoToOven();
-            meringue.transform.parent = null;
             meringue.transform.position = pan.transform.position + new Vector3(0f, 0.15f, 0f);
+            meringue.transform.parent = pan.transform.GetChild(0);
         }
 
         transform.localPosition = initialPosition;

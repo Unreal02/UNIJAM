@@ -5,11 +5,15 @@ using UnityEngine;
 public class Stick : MonoBehaviour
 {
     private PrepareManager prepareManager;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         prepareManager = PrepareManager.Instance;
+        initialPosition = transform.localPosition;
+        initialRotation = transform.localRotation;
     }
 
     // Update is called once per frame
@@ -41,5 +45,12 @@ public class Stick : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0f, 0f, 20f);
         }
+    }
+
+    public void OnGoToOven()
+    {
+        transform.parent = null;
+        transform.localPosition = initialPosition;
+        transform.localRotation = initialRotation;
     }
 }

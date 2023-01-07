@@ -16,8 +16,6 @@ public class OvenController : MonoBehaviour
 
     private Quaternion destQ;
     private Quaternion initRotation;
-    private Vector3 initPos;
-    private Vector3 destPos;
 
     private void Awake()
     {
@@ -72,10 +70,10 @@ public class OvenController : MonoBehaviour
         isInTransition = true;
         if (OpeningSequence)
         {
-            //if (isOvenOn)
-            //{
-            //    TurnOvenOff();
-            //}
+            if (isOvenOn)
+            {
+                TurnOvenOff();
+            }
             while (timeCount < 1f)
             {
                 door.transform.rotation = Quaternion.Slerp(initRotation, destQ * initRotation, timeCount);
@@ -96,7 +94,7 @@ public class OvenController : MonoBehaviour
             }
             isDoorOpen = false;
             isInTransition = false;
-            //TurnOvenOn();
+            TurnOvenOn();
             yield break;
         }
     }
