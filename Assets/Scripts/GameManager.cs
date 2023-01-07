@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
 
 public enum Phase
 {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public Phase phase = Phase.Title;
     private bool prepareSuccess = false;
     private bool assembleSuccess = false;
+    public Stopwatch gameStopwatch;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,8 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        gameStopwatch = new Stopwatch();
 
         // 디버깅용: GetOrderPhase scene에서 시작할 경우
         if (phase == Phase.GetOrder)
@@ -77,6 +81,7 @@ public class GameManager : MonoBehaviour
         phase = Phase.GetOrder;
         yield return new WaitForEndOfFrame();
         CustomerManager.Instance.GenerateOrder();
+        gameStopwatch.Start();
     }
 
     public void GoToPrepare()
