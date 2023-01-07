@@ -8,6 +8,7 @@ public class RayCastInteraction : MonoBehaviour
     public Camera camera;
     private GameObject pan;
     private Vector3 initPanPos;
+    private OvenController OC;
 
     private bool isDraggingPan = false;
 
@@ -19,6 +20,7 @@ public class RayCastInteraction : MonoBehaviour
         {
             initPanPos = pan.transform.position;
         }
+        OC = GameObject.Find("OvenObject").GetComponent<OvenController>();
     }
 
     private void Update()
@@ -35,7 +37,14 @@ public class RayCastInteraction : MonoBehaviour
         {
             if (isDraggingPan)
             {
-                pan.transform.position -= new Vector3(0f, 3.2f, 0f);
+                if (OC.isDoorOpen && pan.transform.localPosition.x > -5f && pan.transform.localPosition.x < 5f)
+                {
+                    pan.transform.localPosition = new Vector3(0f, 1f, 15f);
+                }
+                else
+                {
+                    pan.transform.position = initPanPos;
+                }
             }
             isDraggingPan = false;
         }
@@ -68,9 +77,8 @@ public class RayCastInteraction : MonoBehaviour
         }
     }
 
-    private static void OvenDoorControl(RaycastHit hit)
+    private void OvenDoorControl(RaycastHit hit)
     {
-        OvenController OC = hit.transform.parent.GetComponent<OvenController>();
         if (OC.isDoorOpen)
         {
             OC.CloseDoor();
