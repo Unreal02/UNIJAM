@@ -37,10 +37,10 @@ public class RayCastInteraction : MonoBehaviour
         {
             if (isDraggingPan)
             {
-                if (OC.isDoorOpen && PrepareManager.Instance.phase == PreparePhase.Oven && pan.transform.localPosition.x > -5f && pan.transform.localPosition.x < 5f
+                if (OC.isDoorOpen && PrepareManager.Instance.phase == PreparePhase.Oven && pan.transform.localPosition.x > 8f && pan.transform.localPosition.x < 18f
                     && pan.transform.localPosition.z > 5f && pan.transform.localPosition.z < 8f)
                 {
-                    pan.transform.localPosition = new Vector3(0f, 1.5f, 15f);
+                    pan.transform.localPosition = new Vector3(13f, 1.5f, 15f);
                 }
                 else
                 {

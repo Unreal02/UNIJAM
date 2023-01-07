@@ -7,6 +7,7 @@ public class Bowl : MonoBehaviour
     private Vector3 initialPosition;
     private GameObject meringue;
     private GameObject pan;
+    private GameObject panMeringue;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,8 @@ public class Bowl : MonoBehaviour
         meringue = transform.GetChild(1).gameObject;
         meringue.transform.localScale = new Vector3(1f, 0.001f, 1f);
         pan = GameObject.Find("Pan");
+        panMeringue = pan.transform.GetChild(0).gameObject;
+        panMeringue.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,10 +52,10 @@ public class Bowl : MonoBehaviour
         if (Mathf.Abs(transform.position.x - pan.transform.position.x) < 5 &&
             Mathf.Abs(transform.position.z - pan.transform.position.z) < 5)
         {
-            Debug.Log("asdf");
             PrepareManager.Instance.GoToOven();
-            meringue.transform.position = pan.transform.position + new Vector3(0f, 0.15f, 0f);
-            meringue.transform.parent = pan.transform.GetChild(0);
+            panMeringue.SetActive(true);
+            panMeringue.transform.localScale = meringue.transform.localScale;
+            meringue.gameObject.SetActive(false);
         }
 
         transform.localPosition = initialPosition;
