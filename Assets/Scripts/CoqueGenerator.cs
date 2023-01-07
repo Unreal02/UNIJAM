@@ -14,12 +14,7 @@ public class CoqueGenerator : MonoBehaviour
         OC = GameObject.Find("OvenObject").GetComponent<OvenController>();
     }
 
-    private void Start()
-    {
-        CoqueGeneration();
-    }
-
-    private void CoqueGeneration()
+    public void CoqueGeneration()
     {
         string fileName = "coque";
         if (PrepareManager.Instance.shakeCount > 110f) fileName += "Over";
@@ -36,7 +31,7 @@ public class CoqueGenerator : MonoBehaviour
     }
 
 
-    public static GameObject SpawnCoque(string fileName)
+    private static GameObject SpawnCoque(string fileName)
     {
         GameObject go = (GameObject)Instantiate(Resources.Load(fileName, typeof(GameObject)));
         return go;
