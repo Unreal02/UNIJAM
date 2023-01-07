@@ -104,6 +104,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("PreparePhase");
         phase = Phase.Prepare;
+        meringueSuccess = false;
+        ovenSuccess = false;
+        toppingSuccess = false;
     }
 
     public void GoToTopping()
