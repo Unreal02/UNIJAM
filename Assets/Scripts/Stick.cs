@@ -25,7 +25,7 @@ public class Stick : MonoBehaviour
             prepareManager.GoToMeringue();
             // bowl 위로
             transform.parent = FindObjectOfType<Bowl>().transform;
-            transform.localPosition = new Vector3(0f, 6f, 0f);
+            transform.localPosition = new Vector3(0f, 8f, 0f);
             transform.localRotation = Quaternion.identity;
         }
     }
