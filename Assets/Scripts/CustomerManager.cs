@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class CustomerManager : MonoBehaviour
 {
@@ -123,7 +124,7 @@ public class CustomerManager : MonoBehaviour
         return Enumerable.SequenceEqual(correctOrder, inputOrder);
     }
 
-    private void GenerateOrder()
+    public void GenerateOrder()
     {
         correctOrder = new int[] { -1, -1, -1, -1, -1 };
         int toppingCount = Random.Range(1, MAXTOPPING);
@@ -143,6 +144,8 @@ public class CustomerManager : MonoBehaviour
         }
         drawn.Clear();
         EditOrderText();
+        var orderTextComponent = GameObject.Find("OrderText").GetComponent<TMP_Text>();
+        orderTextComponent.text = orderText;
     }
 
     private void EditOrderText()

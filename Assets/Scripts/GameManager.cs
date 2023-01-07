@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        // 디버깅용: GetOrderPhase scene에서 시작할 경우
+        if (phase == Phase.GetOrder)
+        {
+            GoToGetOrder();
+        }
     }
 
     // Update is called once per frame
@@ -53,8 +59,24 @@ public class GameManager : MonoBehaviour
 
     public void GoToGetOrder()
     {
-        SceneManager.LoadScene("GetOrderPhase");
+        StartCoroutine("_GoToGetOrder");
+    }
+
+    public IEnumerator _GoToGetOrder()
+    {
+        if (SceneManager.GetActiveScene().name != "GetOrderPhase")
+        {
+            // GetOrderPhase scene으로 이동
+            AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync("GetOrderPhase");
+            while (!asyncLoadLevel.isDone)
+            {
+                yield return null;
+            }
+        }
+
         phase = Phase.GetOrder;
+        yield return new WaitForEndOfFrame();
+        CustomerManager.Instance.GenerateOrder();
     }
 
     public void GoToPrepare()
