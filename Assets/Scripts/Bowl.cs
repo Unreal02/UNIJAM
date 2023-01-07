@@ -56,6 +56,7 @@ public class Bowl : MonoBehaviour
             panMeringue.SetActive(true);
             panMeringue.transform.localScale = meringue.transform.localScale;
             meringue.gameObject.SetActive(false);
+            SoundManager.Instance.PlaySFXSound("s2_select");
         }
 
         transform.localPosition = initialPosition;

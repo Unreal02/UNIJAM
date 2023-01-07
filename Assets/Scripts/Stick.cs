@@ -26,6 +26,7 @@ public class Stick : MonoBehaviour
     {
         if (prepareManager.phase == PreparePhase.Init)
         {
+            SoundManager.Instance.PlaySFXSound("s2_select");
             prepareManager.GoToMeringue();
             // bowl 위로
             transform.parent = FindObjectOfType<Bowl>().transform;
@@ -45,6 +46,7 @@ public class Stick : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0f, 0f, 20f);
         }
+        SoundManager.Instance.PlaySFXSound("s2_meringue");
     }
 
     public void OnGoToOven()

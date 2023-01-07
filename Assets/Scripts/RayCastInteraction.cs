@@ -41,6 +41,7 @@ public class RayCastInteraction : MonoBehaviour
                     && pan.transform.localPosition.z > 5f && pan.transform.localPosition.z < 8f)
                 {
                     pan.transform.localPosition = new Vector3(13f, 1.5f, 15f);
+                    SoundManager.Instance.PlaySFXSound("s2_select");
                 }
                 else
                 {

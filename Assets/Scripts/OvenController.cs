@@ -45,6 +45,7 @@ public class OvenController : MonoBehaviour
     {
         elapsedTime = 0f;
         isOvenOn = true;
+        //여기 playsfx하면 될것같은데 12초짜리라 중간에 끊는 방법이 없나
         Debug.Log(elapsedTime);
     }
 

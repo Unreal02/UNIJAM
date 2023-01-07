@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToPrepare()
     {
+        SoundManager.Instance.PlaySFXSound("s1_confirmorder");
         SceneManager.LoadScene("PreparePhase");
         phase = Phase.Prepare;
         meringueSuccess = false;
