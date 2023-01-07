@@ -6,9 +6,16 @@ using UnityEngine;
 public class RayCastInteraction : MonoBehaviour
 {
     public Camera camera;
+    private GameObject pan;
+    private Vector3 initPanPos;
     private void Awake()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        pan = GameObject.FindGameObjectWithTag("Pan")?.gameObject;
+        if (pan != null)
+        {
+            initPanPos = pan.transform.position;
+        }
     }
 
     private void Update()
@@ -26,9 +33,14 @@ public class RayCastInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            //MoveWithCursor(hit, ray);
-            //OvenDoorControl(hit);
-
+            if (hit.transform.CompareTag("Oven"))
+            {
+                OvenDoorControl(hit);
+            }
+            if (hit.transform.CompareTag("Pan"))
+            {
+                MoveWithCursor(hit, ray);
+            }
         }
     }
 

@@ -10,6 +10,9 @@ public class OvenController : MonoBehaviour
     private GameObject clockHand;
     private GameObject door;
     public bool isDoorOpen = false;
+    private bool isInTransition = false;
+    public bool isPanIn = false;
+    private bool isCompleted = false;
 
     private Quaternion destQ;
     private Quaternion initRotation;
@@ -28,8 +31,6 @@ public class OvenController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) TurnOvenOn();
-        if (Input.GetKeyDown(KeyCode.KeypadEnter)) TurnOvenOff();
         if (isOvenOn) elapsedTime += Time.deltaTime;
         float angle = -30f * elapsedTime;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -40,6 +41,7 @@ public class OvenController : MonoBehaviour
     {
         return rotation * (position - pivot) + pivot;
     }
+
     public void TurnOvenOn()
     {
         elapsedTime = 0f;
@@ -49,19 +51,30 @@ public class OvenController : MonoBehaviour
 
     public void OpenDoor()
     {
-        StartCoroutine(DoorOpenClose(true));
+        if (!isInTransition && !isCompleted)
+        {
+            StartCoroutine(DoorOpenClose(true));
+        }
     }
 
     public void CloseDoor()
     {
-        StartCoroutine(DoorOpenClose(false));
+        if (!isInTransition && !isCompleted)
+        {
+            StartCoroutine(DoorOpenClose(false));
+        }
     }
 
-    public IEnumerator DoorOpenClose(bool isOpen)
+    public IEnumerator DoorOpenClose(bool OpeningSequence)
     {
         float timeCount = 0f;
-        if (isOpen)
+        isInTransition = true;
+        if (OpeningSequence)
         {
+            if (isOvenOn)
+            {
+                TurnOvenOff();
+            }
             while (timeCount < 1f)
             {
                 door.transform.rotation = Quaternion.Slerp(initRotation, destQ * initRotation, timeCount);
@@ -70,6 +83,7 @@ public class OvenController : MonoBehaviour
                 yield return null;
             }
             isDoorOpen = true;
+            isInTransition = false;
             yield break;
         }
         else
@@ -82,6 +96,8 @@ public class OvenController : MonoBehaviour
                 yield return null;
             }
             isDoorOpen = false;
+            isInTransition = false;
+            TurnOvenOn();
             yield break;
         }
     }
@@ -89,6 +105,7 @@ public class OvenController : MonoBehaviour
     public void TurnOvenOff()
     {
         isOvenOn = false;
+        isCompleted = true;
         Debug.Log(elapsedTime);
     }
 
