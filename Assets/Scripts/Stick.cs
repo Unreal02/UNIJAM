@@ -24,8 +24,22 @@ public class Stick : MonoBehaviour
         {
             prepareManager.GoToMeringue();
             // bowl 위로
-            transform.localPosition = new Vector3(0f, 4f, 0f);
+            transform.localPosition = new Vector3(0f, 6f, 0f);
             transform.localRotation = Quaternion.identity;
         }
+    }
+
+    public void Shake(int shakeCount)
+    {
+        // 좌우 왔다갔다
+        if (shakeCount % 2 == 0)
+        {
+            transform.localRotation = Quaternion.Euler(0f, 0f, -20f);
+        }
+        else
+        {
+            transform.localRotation = Quaternion.Euler(0f, 0f, 20f);
+        }
+        Debug.Log(transform.localEulerAngles);
     }
 }
