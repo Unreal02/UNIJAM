@@ -13,6 +13,7 @@ public class Bowl : MonoBehaviour
     {
         initialPosition = transform.localPosition;
         meringue = transform.GetChild(1).gameObject;
+        meringue.transform.localScale = new Vector3(1f, 0.001f, 1f);
         pan = GameObject.Find("Pan");
     }
 
@@ -22,11 +23,16 @@ public class Bowl : MonoBehaviour
 
     }
 
+    public void Shake(int shakeCount)
+    {
+        meringue.transform.localScale = new Vector3(1f, shakeCount / 100f, 1f);
+    }
+
     private void OnMouseDrag()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         float y = ray.direction.y;
-        float dist = ray.origin.y / Mathf.Abs(y);
+        float dist = (ray.origin.y - 0.5f) / Mathf.Abs(y);
         transform.localPosition = ray.GetPoint(dist);
     }
 
@@ -46,7 +52,7 @@ public class Bowl : MonoBehaviour
             Debug.Log("asdf");
             PrepareManager.Instance.GoToOven();
             meringue.transform.parent = null;
-            meringue.transform.position = pan.transform.position;
+            meringue.transform.position = pan.transform.position + new Vector3(0f, 0.15f, 0f);
         }
 
         transform.localPosition = initialPosition;

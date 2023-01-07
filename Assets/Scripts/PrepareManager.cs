@@ -31,6 +31,7 @@ public class PrepareManager : MonoBehaviour
     private Stick stick;
     private GameObject meringueProgress;
     private Image progressBar;
+    private Bowl bowl;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,7 @@ public class PrepareManager : MonoBehaviour
         meringueProgress = GameObject.Find("MeringueProgress");
         progressBar = GameObject.Find("ProgressBar").GetComponent<Image>();
         meringueProgress.SetActive(false);
+        bowl = FindObjectOfType<Bowl>();
     }
 
     // Update is called once per frame
@@ -74,6 +76,7 @@ public class PrepareManager : MonoBehaviour
         shakeCount++;
         Debug.Log(string.Format("Shake {0}", shakeCount));
         stick.Shake(shakeCount);
+        bowl.Shake(shakeCount);
         // progress bar
         progressBar.fillAmount = shakeCount / 120f;
     }
