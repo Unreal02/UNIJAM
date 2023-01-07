@@ -19,7 +19,7 @@ public class OvenController : MonoBehaviour
 
     private void Awake()
     {
-        clockHand = GameObject.Find("ClockHand")?.gameObject;
+        clockHand = GameObject.Find("timerBase")?.gameObject;
         door = this.transform.GetChild(1).gameObject;
         destQ = Quaternion.AngleAxis(-80f, Vector3.right);
         initRotation = door.transform.rotation;
@@ -28,11 +28,11 @@ public class OvenController : MonoBehaviour
     private void Update()
     {
         if (isOvenOn) elapsedTime += Time.deltaTime;
-        float angle = -30f * elapsedTime;
+        float angle = 30f * elapsedTime;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         if (clockHand != null)
         {
-            clockHand.transform.GetChild(0).transform.rotation = rotation;
+            clockHand.transform.GetChild(0).transform.localRotation = rotation;
         }
     }
 
