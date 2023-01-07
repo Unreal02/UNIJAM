@@ -8,6 +8,9 @@ public class RayCastInteraction : MonoBehaviour
     public Camera camera;
     private GameObject pan;
     private Vector3 initPanPos;
+
+    private bool isDraggingPan = false;
+
     private void Awake()
     {
         camera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -20,9 +23,21 @@ public class RayCastInteraction : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            FireRayDown();
+        }
         if (Input.GetMouseButton(0))
         {
             FireRay();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (isDraggingPan)
+            {
+                pan.transform.position -= new Vector3(0f, 3.2f, 0f);
+            }
+            isDraggingPan = false;
         }
     }
 
@@ -33,13 +48,22 @@ public class RayCastInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform.CompareTag("Oven"))
-            {
-                OvenDoorControl(hit);
-            }
             if (hit.transform.CompareTag("Pan"))
             {
                 MoveWithCursor(hit, ray);
+            }
+        }
+    }
+    private void FireRayDown()
+    {
+        RaycastHit hit;
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.CompareTag("Oven"))
+            {
+                OvenDoorControl(hit);
             }
         }
     }
@@ -57,13 +81,14 @@ public class RayCastInteraction : MonoBehaviour
         }
     }
 
-    private static void MoveWithCursor(RaycastHit hit, Ray ray)
+    private void MoveWithCursor(RaycastHit hit, Ray ray)
     {
         Transform objectHit = hit.transform;
         GameObject Go = objectHit.gameObject;
         float dist = hit.distance;
 
         Vector3 position = ray.origin + dist * ray.direction;
-        Go.transform.position = new Vector3(position.x, position.y, Go.transform.position.z);
+        Go.transform.position = new Vector3(position.x, initPanPos.y + 3.2f, position.z);
+        isDraggingPan = true;
     }
 }
