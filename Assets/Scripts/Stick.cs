@@ -24,6 +24,7 @@ public class Stick : MonoBehaviour
         {
             prepareManager.GoToMeringue();
             // bowl 위로
+            transform.parent = FindObjectOfType<Bowl>().transform;
             transform.localPosition = new Vector3(0f, 6f, 0f);
             transform.localRotation = Quaternion.identity;
         }
@@ -40,6 +41,5 @@ public class Stick : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0f, 0f, 20f);
         }
-        Debug.Log(transform.localEulerAngles);
     }
 }

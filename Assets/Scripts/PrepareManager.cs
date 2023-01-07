@@ -63,6 +63,12 @@ public class PrepareManager : MonoBehaviour
         progressBar.fillAmount = 0;
     }
 
+    public void GoToOven()
+    {
+        phase = PreparePhase.Oven;
+        Debug.Log(CheckShake());
+    }
+
     public void Shake()
     {
         shakeCount++;
@@ -70,5 +76,18 @@ public class PrepareManager : MonoBehaviour
         stick.Shake(shakeCount);
         // progress bar
         progressBar.fillAmount = shakeCount / 120f;
+    }
+
+    public bool CheckShake()
+    {
+        if (shakeCount < 90 || shakeCount > 110)
+        {
+            return false;
+
+        }
+        else
+        {
+            return true;
+        }
     }
 }
