@@ -72,7 +72,7 @@ public class OvenController : MonoBehaviour
         {
             if (isOvenOn)
             {
-                TurnOvenOff();
+                StartCoroutine("TurnOvenOff");
             }
             while (timeCount < 1f)
             {
@@ -99,11 +99,14 @@ public class OvenController : MonoBehaviour
         }
     }
 
-    public void TurnOvenOff()
+    public IEnumerator TurnOvenOff()
     {
         isOvenOn = false;
         isCompleted = true;
         Debug.Log(elapsedTime);
+        GameManager.Instance.ovenSuccess = CheckTimer();
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.GoToTopping();
     }
 
     public bool CheckTimer()

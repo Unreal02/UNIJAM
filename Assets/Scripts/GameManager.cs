@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
     }
 
     public Phase phase = Phase.Title;
-    private bool MeringueSuccess = false;
-    private bool OvenSuccess = false;
-    private bool ToppingSuccess = false;
+    public bool meringueSuccess = false;
+    public bool ovenSuccess = false;
+    public bool toppingSuccess = false;
     private int score = 0;
     public Stopwatch gameStopwatch;
     public float gameTimeLimit = 100f;
@@ -117,8 +117,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("ResultPhase");
         phase = Phase.Result;
 
-        if (MeringueSuccess && OvenSuccess && ToppingSuccess)
+        if (meringueSuccess && ovenSuccess && toppingSuccess)
         {
+            // 성공
             score++;
         }
     }
@@ -153,18 +154,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(10f);
 
         GoToTitle();
-    }
-
-    public void Done()
-    {
-        // 성공/실패 판정
-        if (MeringueSuccess && OvenSuccess)
-        {
-            // 성공
-        }
-        else
-        {
-            // 실패
-        }
     }
 }

@@ -70,6 +70,7 @@ public class PrepareManager : MonoBehaviour
         phase = PreparePhase.Oven;
         stick.OnGoToOven();
         Debug.Log(CheckShake());
+        GameManager.Instance.meringueSuccess = CheckShake();
     }
 
     public void Shake()
