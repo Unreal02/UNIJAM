@@ -6,6 +6,8 @@ TagManager:
   tags:
   - filling
   - macaroon
+  - Oven
+  - shelf
   layers:
   - Default
   - TransparentFX

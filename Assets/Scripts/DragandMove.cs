@@ -13,8 +13,6 @@ public class DragandMove : MonoBehaviour
     {
         initPos = this.gameObject.transform.position;
     }
-
-   
    
     private void Update()
     {
@@ -31,7 +29,7 @@ public class DragandMove : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log(hit.transform.tag);
+            //Debug.Log(hit.transform.tag);
             if (hit.transform.CompareTag("filling"))
             {
                 MoveWithCursor(hit, ray);
