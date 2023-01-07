@@ -47,7 +47,7 @@ public class DragTest : MonoBehaviour
             if (!collision.collider.gameObject.CompareTag("filling"))
             {
                 //Debug.Log(collision.collider.gameObject);
-                if (this.gameObject.tag == "macaroon")
+                if (this.gameObject.tag == "macaroon" && this.gameObject.transform.parent)
                 {
                     int index = this.gameObject.transform.parent.GetSiblingIndex();
                     CustomerManager.Instance.DeleteOrder(index % 5, index / 5);
