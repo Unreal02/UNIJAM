@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: wood
+  m_Name: wall
   m_Shader: {fileID: 4800000, guid: f64828a49a3dd1c4ea0343c9ca2a056c, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a43f9fb085af44340b90d064cd559007, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4bf09fd36dfbb064493707f9e2344b8f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -49,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 2800000, guid: ddba51e58833f574dbfe9bdecf261a72, type: 3}
+        m_Texture: {fileID: 2800000, guid: d2ae9b7050ef19240bb3bf9ce24e9b5d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -71,21 +71,21 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _NormalIntensity: 1.5
-    - _NormalStrength: 1
+    - _NormalIntensity: 3
+    - _NormalStrength: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RimAmount: 0.351
-    - _RimThreshold: 0.257
+    - _RimAmount: 0.716
+    - _RimThreshold: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _AmbientColor: {r: 1, g: 0.3755251, b: 0.16666657, a: 1}
-    - _Color: {r: 0.2830189, g: 0.23743597, b: 0.17265931, a: 1}
+    - _AmbientColor: {r: 0.735849, g: 0.44797194, b: 0.28230682, a: 1}
+    - _Color: {r: 0.70854634, g: 0.745283, b: 0.65856767, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 1, g: 0.90707856, b: 0, a: 1}
+    - _SpecularColor: {r: 0.754717, g: 0.36255118, b: 0.24682562, a: 1}
   m_BuildTextureStacks: []
