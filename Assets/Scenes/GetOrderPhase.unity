@@ -805,6 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase: 1
+  gameTimeLimit: 100
 --- !u!4 &1119502749
 Transform:
   m_ObjectHideFlags: 0
@@ -1187,8 +1188,9 @@ GameObject:
   - component: {fileID: 2089575012}
   - component: {fileID: 2089575011}
   - component: {fileID: 2089575010}
+  - component: {fileID: 2089575013}
   m_Layer: 5
-  m_Name: Next Button
+  m_Name: GoToPrepareButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1258,19 +1260,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2089575011}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1119502748}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToPrepare
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2089575011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1309,3 +1299,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089575008}
   m_CullTransparentMesh: 1
+--- !u!114 &2089575013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089575008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ce6ad43a46ac04eb474f236a1d4143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
