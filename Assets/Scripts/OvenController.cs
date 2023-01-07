@@ -21,12 +21,10 @@ public class OvenController : MonoBehaviour
 
     private void Awake()
     {
-        clockHand = GameObject.Find("ClockHand");
+        clockHand = GameObject.Find("ClockHand")?.gameObject;
         door = this.transform.GetChild(1).gameObject;
-        destQ = Quaternion.AngleAxis(-90f, Vector3.right);
+        destQ = Quaternion.AngleAxis(-80f, Vector3.right);
         initRotation = door.transform.rotation;
-        initPos = door.transform.position;
-        destPos = RotateAround(initPos, new Vector3(initPos.x, initPos.y - 1f, initPos.z + 0.25f), destQ);
     }
 
     private void Update()
@@ -34,7 +32,10 @@ public class OvenController : MonoBehaviour
         if (isOvenOn) elapsedTime += Time.deltaTime;
         float angle = -30f * elapsedTime;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        clockHand.transform.GetChild(0).transform.rotation = rotation;
+        if (clockHand != null)
+        {
+            clockHand.transform.GetChild(0).transform.rotation = rotation;
+        }
     }
 
     private Vector3 RotateAround(Vector3 position, Vector3 pivot, Quaternion rotation)
@@ -71,14 +72,13 @@ public class OvenController : MonoBehaviour
         isInTransition = true;
         if (OpeningSequence)
         {
-            if (isOvenOn)
-            {
-                TurnOvenOff();
-            }
+            //if (isOvenOn)
+            //{
+            //    TurnOvenOff();
+            //}
             while (timeCount < 1f)
             {
                 door.transform.rotation = Quaternion.Slerp(initRotation, destQ * initRotation, timeCount);
-                door.transform.position = Vector3.Slerp(initPos, destPos, timeCount);
                 timeCount += Time.deltaTime;
                 yield return null;
             }
@@ -91,13 +91,12 @@ public class OvenController : MonoBehaviour
             while (timeCount < 1f)
             {
                 door.transform.rotation = Quaternion.Slerp(initRotation, destQ * initRotation, 1 - timeCount);
-                door.transform.position = Vector3.Slerp(initPos, destPos, 1 - timeCount);
                 timeCount += Time.deltaTime;
                 yield return null;
             }
             isDoorOpen = false;
             isInTransition = false;
-            TurnOvenOn();
+            //TurnOvenOn();
             yield break;
         }
     }
