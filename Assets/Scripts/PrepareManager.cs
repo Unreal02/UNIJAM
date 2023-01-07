@@ -27,7 +27,7 @@ public class PrepareManager : MonoBehaviour
     }
 
     public PreparePhase phase;
-    private int shakeCount = 0;
+    public int shakeCount { get; private set; } = 0;
     private Stick stick;
     private GameObject meringueProgress;
     private Image progressBar;

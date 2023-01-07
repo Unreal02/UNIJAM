@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class OvenController : MonoBehaviour
 {
-    private float elapsedTime = 0f;
+    public float elapsedTime { get; private set; } = 0f;
     private bool isOvenOn = false;
     private GameObject clockHand;
     private GameObject door;
