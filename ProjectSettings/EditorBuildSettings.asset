@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/PreparePhase.unity
     guid: df45cc81ebe428043a57f9eeaab085e9
   - enabled: 1
+    path: Assets/Scenes/ToppingScene.unity
+    guid: 7138a5f8c4a454643850b8aff9b210cd
+  - enabled: 1
     path: Assets/Scenes/ToppingPhase.unity
     guid: 5999501587419684280dd4b29edf67ff
   - enabled: 1

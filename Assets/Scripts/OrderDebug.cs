@@ -11,10 +11,12 @@ public class OrderDebug : MonoBehaviour
         CustomerManager.Instance.InputOrder(index % 5, index / 5);
         Debug.Log(CustomerManager.Instance.GetTopping(index / 5, index % 5) + " was added");
     }
-    
+
     public void CheckAnswer()
     {
+        GameManager.Instance.toppingSuccess = CustomerManager.Instance.CheckOrder();
         Debug.Log(CustomerManager.Instance.CheckOrder());
         CustomerManager.Instance.ResetInputOrder();
+        GameManager.Instance.GoToResult();
     }
 }

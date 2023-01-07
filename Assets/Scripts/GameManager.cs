@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
     }
 
     public Phase phase = Phase.Title;
-    public bool meringueSuccess = false;
-    public bool ovenSuccess = false;
-    public bool toppingSuccess = false;
+    public bool meringueSuccess;
+    public bool ovenSuccess;
+    public bool toppingSuccess;
     private int score = 0;
     public Stopwatch gameStopwatch;
     public float gameTimeLimit = 100f;
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToTopping()
     {
-        SceneManager.LoadScene("ToppingPhase");
+        SceneManager.LoadScene("ToppingScene");
         phase = Phase.Topping;
     }
 
@@ -133,6 +133,10 @@ public class GameManager : MonoBehaviour
         // GetOrderPhaseUI 숨기기
         GameObject getOrderPhaseUI = GameObject.Find("GetOrderPhaseUI");
         getOrderPhaseUI.SetActive(false);
+
+        UnityEngine.Debug.Log(meringueSuccess);
+        UnityEngine.Debug.Log(ovenSuccess);
+        UnityEngine.Debug.Log(toppingSuccess);
 
         // ResultUI
         GameObject resultUI = GameObject.Find("ResultPhaseUI");
