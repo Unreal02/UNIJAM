@@ -31,7 +31,8 @@ public class Stick : MonoBehaviour
             // bowl 위로
             transform.parent = FindObjectOfType<Bowl>().transform;
             transform.localPosition = new Vector3(0f, 8f, 0f);
-            transform.localRotation = Quaternion.identity;
+            //transform.localRotation = Quaternion.identity;
+            transform.localRotation = Quaternion.Euler(0f, 0f, -20f);
         }
     }
 
@@ -40,13 +41,25 @@ public class Stick : MonoBehaviour
         // 좌우 왔다갔다
         if (shakeCount % 2 == 0)
         {
-            transform.localRotation = Quaternion.Euler(0f, 0f, -20f);
+            StartCoroutine(ShakeCoroutine());
         }
         else
         {
-            transform.localRotation = Quaternion.Euler(0f, 0f, 20f);
+            StartCoroutine(ShakeCoroutine());
         }
-        SoundManager.Instance.PlaySFXSound("s2_meringue",2f);
+        SoundManager.Instance.PlaySFXSound("s2_meringue", 2f);
+    }
+
+    public IEnumerator ShakeCoroutine()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < 1f)
+        {
+            transform.localRotation = Quaternion.AngleAxis(30f, Vector3.up) * transform.localRotation;
+            elapsedTime += Time.deltaTime * 5f;
+            yield return null;
+        }
+        yield break;
     }
 
     public void OnGoToOven()
