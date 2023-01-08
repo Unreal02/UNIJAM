@@ -220,15 +220,21 @@ public class GameManager : MonoBehaviour
         phase = Phase.FinalResult;
         Destroy(GameStopwatch.Instance.gameObject);
         GameObject uiObject = GameObject.Find("FinalResultUI");
-        TMP_Text text = uiObject.transform.Find("Text").GetComponent<TMP_Text>();
+        GameObject successUI = uiObject.transform.GetChild(0).gameObject;
+        GameObject failUI = uiObject.transform.GetChild(1).gameObject;
+        TMP_Text text = uiObject.transform.GetChild(2).GetComponent<TMP_Text>();
         text.text = string.Format("180초 동안 {0}개의 마카롱을 만들었어요.\n", score);
         if (score >= 3)
         {
             text.text += "이 가게는 성공적이네요!";
+            successUI.SetActive(true);
+            failUI.SetActive(false);
         }
         else
         {
             text.text += "이 가게는 폐업 각이네요!";
+            failUI.SetActive(true);
+            successUI.SetActive(false);
         }
 
         yield return new WaitForSeconds(10f);
