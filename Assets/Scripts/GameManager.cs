@@ -247,7 +247,7 @@ public class GameManager : MonoBehaviour
             Destroy(i);
         }
         SoundManager.Instance.StopSFXSound();
-        SoundManager.Instance.PlayBGMSound();
+        SoundManager.Instance.PlayBGMSound(0.5f);
         getOrderPhaseUI.SetActive(true);
         resultUI.transform.GetChild(0).gameObject.SetActive(false);
         resultUI.transform.GetChild(1).gameObject.SetActive(false);
