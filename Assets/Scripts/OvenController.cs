@@ -47,9 +47,18 @@ public class OvenController : MonoBehaviour
         elapsedTime = 0f;
         isOvenOn = true;
         SoundManager.Instance.PlaySFXSound("s2_ovencountdown");
-        SoundManager.Instance.PlaySFXSound("s2_oventimeover",0.5f);
-        //여기 playsfx하면 될것같은데 12초짜리라 중간에 끊는 방법이 없나
+        StartCoroutine(OvenTimerSound());
         Debug.Log(elapsedTime);
+    }
+
+    public IEnumerator OvenTimerSound()
+    {
+        yield return new WaitForSeconds(12f);
+        if (isCompleted)
+        {
+            SoundManager.Instance.PlaySFXSound("s2_oventimeover", 0.5f);
+        }
+        yield break;
     }
 
     public void OpenDoor()
