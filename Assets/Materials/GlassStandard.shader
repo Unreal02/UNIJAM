@@ -4,6 +4,10 @@ Shader "Custom/GlassStandard"
 	{
 		_MainTex("Texture", 2D) = "white" {}
 		_Color("Color", Color) = (1, 1, 1, 1)
+		[HDR]
+		_NormalTex("Normal Texture", 2D) = "white" {}
+		_NormalIntensity("Normal Intensity", Float) = 1
+		_NormalStrength("Normal Strength", Float) = 1
 		_EdgeColor("Edge Color", Color) = (1, 1, 1, 1)
 		_EdgeThickness("Silouette Dropoff Rate", float) = 1.0
 	}
@@ -29,6 +33,9 @@ Shader "Custom/GlassStandard"
 			// Properties
 			sampler2D		_MainTex;
 			uniform float4	_Color;
+			sampler2D _NormalTex;
+			float _NormalIntensity;	
+			float _NormalStrength;	
 			uniform float4	_EdgeColor;
 			uniform float   _EdgeThickness;
 
@@ -66,13 +73,14 @@ Shader "Custom/GlassStandard"
 			{
 				// sample texture for color
 				float4 texColor = tex2D(_MainTex, input.texCoord.xy);
+				float3 normalTex = tex2D(_NormalTex, input.texCoord.xy).xyz;
 
 				// apply silouette equation
 				// based on how close normal is to being orthogonal to view vector
 				// dot product is smaller the smaller the angle bw the vectors is
 				// close to edge = closer to 0
 				// far from edge = closer to 1
-				float edgeFactor = abs(dot(input.viewDir, input.normal));
+				float edgeFactor = abs(dot(input.viewDir, input.normal * pow(normalTex, _NormalIntensity) * _NormalStrength));
                 edgeFactor = smoothstep(0.3, 0.35, edgeFactor);
 
 				// apply edgeFactor to Albedo color & EdgeColor
