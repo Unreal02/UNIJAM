@@ -28,6 +28,7 @@ public class OvenController : MonoBehaviour
     private void Update()
     {
         if (isOvenOn) elapsedTime += Time.deltaTime;
+        elapsedTime = Mathf.Clamp(elapsedTime, 0f, 12f);
         float angle = 30f * elapsedTime;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         if (clockHand != null)
@@ -113,7 +114,7 @@ public class OvenController : MonoBehaviour
 
     public bool CheckTimer()
     {
-        if (elapsedTime < 10f || elapsedTime > 12f)
+        if (elapsedTime < 10f || elapsedTime >= 12f)
         {
             return false;
         }
