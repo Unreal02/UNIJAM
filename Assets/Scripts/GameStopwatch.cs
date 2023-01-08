@@ -52,7 +52,6 @@ public class GameStopwatch : MonoBehaviour
         moon.GetComponent<Image>().fillAmount = moon.transform.localPosition.y / 100f + 0.5f;
         Image image = background.GetComponent<Image>();
 
-        Debug.Log(sunAngle);
         Color sky = new Color(0.54f, 0.72f, 1f);
         Color dark = new Color(0.2f, 0.2f, 0.2f);
         if (sunAngle < Mathf.PI - 0.75f) image.color = sky;
