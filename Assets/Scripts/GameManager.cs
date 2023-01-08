@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
         Destroy(GameStopwatch.Instance.gameObject);
         GameObject uiObject = GameObject.Find("FinalResultUI");
         TMP_Text text = uiObject.transform.Find("Text").GetComponent<TMP_Text>();
-        text.text = string.Format("100초 동안 {0}개의 마카롱을 만들었어요.\n", score);
+        text.text = string.Format("180초 동안 {0}개의 마카롱을 만들었어요.\n", score);
         if (score >= 3)
         {
             text.text += "이 가게는 성공적이네요!";
