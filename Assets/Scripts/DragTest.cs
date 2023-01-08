@@ -9,7 +9,7 @@ public class DragTest : MonoBehaviour
     float scroll = 1f;
     Vector3 initpos;
 
-    private void Start()
+    void Start()
     {
         initpos = transform.position;
     }
@@ -24,11 +24,12 @@ public class DragTest : MonoBehaviour
         transform.position = Camera.main.transform.position + dir.normalized * (10f * scroll);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.gameObject.CompareTag("macaroon"))
         {
             this.gameObject.tag = "macaroon";
+            SoundManager.Instance.PlaySFXSound("s3_selecttopping", 0.6f);
 
             if (this.gameObject.transform.parent)
             {

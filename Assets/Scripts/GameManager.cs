@@ -168,6 +168,8 @@ public class GameManager : MonoBehaviour
             UnityEngine.Debug.Log("success");
             resultUI.transform.GetChild(0).gameObject.SetActive(true);
             resultUI.transform.GetChild(1).gameObject.SetActive(false);
+            SoundManager.Instance.StopBGMSound();
+            SoundManager.Instance.PlaySFXSound("s1_success_ending");
         }
         else
         {
@@ -176,6 +178,8 @@ public class GameManager : MonoBehaviour
             resultUI.transform.GetChild(1).gameObject.SetActive(true);
             resultUI.transform.GetChild(0).gameObject.SetActive(false);
             TMP_Text text = resultUI.transform.GetChild(1).GetComponentInChildren<TMP_Text>();
+            SoundManager.Instance.StopBGMSound();
+            SoundManager.Instance.PlaySFXSound("s1_fail_ending");
 
             if (!meringueSuccess)
             {
@@ -198,6 +202,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         // GetOrderPhase로 이동
+        SoundManager.Instance.StopSFXSound();
+        SoundManager.Instance.PlayBGMSound();
         getOrderPhaseUI.SetActive(true);
         resultUI.transform.GetChild(0).gameObject.SetActive(false);
         resultUI.transform.GetChild(1).gameObject.SetActive(false);

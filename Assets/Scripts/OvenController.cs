@@ -45,6 +45,8 @@ public class OvenController : MonoBehaviour
     {
         elapsedTime = 0f;
         isOvenOn = true;
+        SoundManager.Instance.PlaySFXSound("s2_ovencountdown");
+        SoundManager.Instance.PlaySFXSound("s2_oventimeover",0.5f);
         //여기 playsfx하면 될것같은데 12초짜리라 중간에 끊는 방법이 없나
         Debug.Log(elapsedTime);
     }
@@ -102,6 +104,7 @@ public class OvenController : MonoBehaviour
 
     public IEnumerator TurnOvenOff()
     {
+        SoundManager.Instance.StopSFXSound();
         isOvenOn = false;
         isCompleted = true;
         Debug.Log(elapsedTime);

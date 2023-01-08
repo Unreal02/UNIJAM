@@ -14,6 +14,7 @@ public class OrderDebug : MonoBehaviour
 
     public void CheckAnswer()
     {
+        SoundManager.Instance.PlaySFXSound("s1_confirmorder");
         GameManager.Instance.toppingSuccess = CustomerManager.Instance.CheckOrder();
         Debug.Log(CustomerManager.Instance.CheckOrder());
         CustomerManager.Instance.ResetInputOrder();

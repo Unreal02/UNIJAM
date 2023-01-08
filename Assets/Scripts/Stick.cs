@@ -46,7 +46,7 @@ public class Stick : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0f, 0f, 20f);
         }
-        SoundManager.Instance.PlaySFXSound("s2_meringue");
+        SoundManager.Instance.PlaySFXSound("s2_meringue",2f);
     }
 
     public void OnGoToOven()

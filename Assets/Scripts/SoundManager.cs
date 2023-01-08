@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -95,13 +95,18 @@ public class SoundManager : MonoBehaviour
         bgmPlayer.Stop();
     }
 
+    public void StopSFXSound()
+    {
+        sfxPlayer.Stop();
+    }
+
     // SFX 볼륨 설정
     public void SetSFXVolume(float volume)
     {
         masterVolumeSFX = volume;
     }
 
-    public float GetSFXVolume()
+    public float GetSFXVolume(string v)
     {
         return masterVolumeSFX;
     }
