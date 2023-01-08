@@ -163,6 +163,26 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator _GoToResult()
     {
+        // 완성된 마카롱 전달
+        List<GameObject> macaron = new List<GameObject>();
+        GameObject coque = GameObject.Find("coque");
+        GameObject coqueTop = GameObject.Find("coque_top");
+        macaron.Add(coque);
+        macaron.Add(coqueTop);
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject filling = GameObject.Find(string.Format("filling0{0}", i));
+            if ((filling.transform.position.x - coque.transform.position.x) <= 5f &&
+                (filling.transform.position.y - coque.transform.position.y) <= 5f)
+                filling.transform.parent = null;
+            macaron.Add(filling);
+        }
+
+        foreach (GameObject i in macaron)
+        {
+            DontDestroyOnLoad(i);
+        }
+
         // GetOrderPhase scene으로 이동
         AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync("GetOrderPhase");
         while (!asyncLoadLevel.isDone)
@@ -222,6 +242,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         // GetOrderPhase로 이동
+        foreach (GameObject i in macaron)
+        {
+            Destroy(i);
+        }
         SoundManager.Instance.StopSFXSound();
         SoundManager.Instance.PlayBGMSound();
         getOrderPhaseUI.SetActive(true);
