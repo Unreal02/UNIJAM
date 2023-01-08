@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         isBurnt = b;
         isRaw = r;
     }
-    public static GameObject SpawnCoque(string fileName, ref bool isBurnt, ref bool isRaw)
+    public GameObject SpawnCoque()
     {
         GameObject go = (GameObject)Instantiate(Resources.Load(fileName, typeof(GameObject)));
         if (isBurnt) go.GetComponent<MeshRenderer>().material = (Material)Resources.Load("_coque_Burned", typeof(Material));
