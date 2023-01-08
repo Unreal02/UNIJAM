@@ -39,6 +39,26 @@ public class GameManager : MonoBehaviour
     public Stopwatch gameStopwatch;
     public float gameTimeLimit = 180f;
 
+    public string fileName { get; private set; }
+    public bool isBurnt { get; private set; }
+    public bool isRaw { get; private set; }
+
+    public void SetFileInfo(string f, bool b, bool r)
+    {
+        fileName = f;
+        isBurnt = b;
+        isRaw = r;
+    }
+    public static GameObject SpawnCoque(string fileName, ref bool isBurnt, ref bool isRaw)
+    {
+        GameObject go = (GameObject)Instantiate(Resources.Load(fileName, typeof(GameObject)));
+        if (isBurnt) go.GetComponent<MeshRenderer>().material = (Material)Resources.Load("_coque_Burned", typeof(Material));
+        else if (isRaw) go.GetComponent<MeshRenderer>().material = (Material)Resources.Load("_coque_Raw", typeof(Material));
+        isBurnt = false;
+        isRaw = false;
+        return go;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

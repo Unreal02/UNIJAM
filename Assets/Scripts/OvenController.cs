@@ -106,7 +106,7 @@ public class OvenController : MonoBehaviour
         isCompleted = true;
         Debug.Log(elapsedTime);
         GameManager.Instance.ovenSuccess = CheckTimer();
-        this.gameObject.GetComponent<CoqueGenerator>().CoqueGeneration();
+        this.gameObject.GetComponent<CoqueGenerator>().CoqueNameGeneration();
         yield return new WaitForSeconds(3f);
         GameManager.Instance.GoToTopping();
     }
