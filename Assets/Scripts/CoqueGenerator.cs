@@ -20,7 +20,7 @@ public class CoqueGenerator : MonoBehaviour
         string fileName = "coque";
         if (PrepareManager.Instance.shakeCount > 110f) fileName += "Over";
         if (PrepareManager.Instance.shakeCount < 90f) fileName += "Under";
-        if (OC.elapsedTime > 12f) isBurnt = true;
+        if (OC.elapsedTime >= 12f) isBurnt = true;
         else if (OC.elapsedTime < 10f) isRaw = true;
         int index = Random.Range(0, 5);
         fileName += suffix[index];
