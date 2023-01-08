@@ -172,8 +172,8 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             GameObject filling = GameObject.Find(string.Format("filling0{0}", i));
-            if ((filling.transform.position.x - coque.transform.position.x) <= 5f &&
-                (filling.transform.position.y - coque.transform.position.y) <= 5f)
+            if (Mathf.Abs(filling.transform.position.x - coque.transform.position.x) <= 5f &&
+                Mathf.Abs(filling.transform.position.z - coque.transform.position.z) <= 5f)
                 filling.transform.parent = null;
             macaron.Add(filling);
         }
