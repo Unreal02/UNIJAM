@@ -9,6 +9,7 @@ public class RayCastInteraction : MonoBehaviour
     private GameObject pan;
     private Vector3 initPanPos;
     private OvenController OC;
+    private Bowl bowl;
 
     private bool isDraggingPan = false;
 
@@ -21,10 +22,15 @@ public class RayCastInteraction : MonoBehaviour
             initPanPos = pan.transform.position;
         }
         OC = GameObject.Find("OvenObject").GetComponent<OvenController>();
+        bowl = GameObject.Find("Bowl").GetComponent<Bowl>();
     }
 
     private void Update()
     {
+        if (bowl.isBowlDragging)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             FireRayDown();
@@ -54,6 +60,7 @@ public class RayCastInteraction : MonoBehaviour
 
     private void FireRay()
     {
+        
         RaycastHit hit;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
@@ -67,6 +74,7 @@ public class RayCastInteraction : MonoBehaviour
     }
     private void FireRayDown()
     {
+        
         RaycastHit hit;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 

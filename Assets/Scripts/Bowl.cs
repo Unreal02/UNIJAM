@@ -8,6 +8,7 @@ public class Bowl : MonoBehaviour
     private GameObject meringue;
     private GameObject pan;
     private GameObject panMeringue;
+    public bool isBowlDragging=false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class Bowl : MonoBehaviour
         float y = ray.direction.y;
         float dist = (ray.origin.y - 0.5f) / Mathf.Abs(y);
         transform.localPosition = ray.GetPoint(dist);
+        isBowlDragging = true;
     }
 
     private void OnMouseUpAsButton()
@@ -44,6 +46,7 @@ public class Bowl : MonoBehaviour
         if (PrepareManager.Instance.phase != PreparePhase.Meringue)
         {
             transform.localPosition = initialPosition;
+            isBowlDragging = false;
             return;
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -60,5 +63,6 @@ public class Bowl : MonoBehaviour
         }
 
         transform.localPosition = initialPosition;
+        isBowlDragging = false;
     }
 }
