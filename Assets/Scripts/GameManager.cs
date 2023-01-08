@@ -132,8 +132,28 @@ public class GameManager : MonoBehaviour
 
     public void GoToTopping()
     {
-        SceneManager.LoadScene("ToppingScene");
+        StartCoroutine("_GoToTopping");
+    }
+
+    private IEnumerator _GoToTopping()
+    {
+        // ToppingScene scene으로 이동
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync("ToppingScene");
+        while (!asyncLoadLevel.isDone)
+        {
+            yield return null;
+        }
         phase = Phase.Topping;
+
+        GameObject coqueRef = SpawnCoque();
+
+        GameObject coque = GameObject.Find("coque");
+        GameObject coqueTop = GameObject.Find("coque_top");
+
+        coque.GetComponent<MeshFilter>().mesh = coqueRef.GetComponent<MeshFilter>().mesh;
+        coqueTop.GetComponent<MeshFilter>().mesh = coqueRef.GetComponent<MeshFilter>().mesh;
+        coque.GetComponent<MeshRenderer>().material = coqueRef.GetComponent<MeshRenderer>().material;
+        coqueTop.GetComponent<MeshRenderer>().material = coqueRef.GetComponent<MeshRenderer>().material;
     }
 
     public void GoToResult()
